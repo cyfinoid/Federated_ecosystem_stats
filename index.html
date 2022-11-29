@@ -33,7 +33,7 @@ d3.csv("stats_version.csv", function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0,6000])
+    .domain([0,d3.max(data,function(d){return d.count;})])
     .range([ 0, width]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
@@ -93,7 +93,7 @@ d3.csv("stats.csv", function(data) {
 
   // Add X axis
   var x = d3.scaleLinear()
-    .domain([0,6000])
+    .domain([0,d3.max(data,function(d){return d.count;})])
     .range([ 0, width]);
   svg.append("g")
     .attr("transform", "translate(0," + height + ")")
