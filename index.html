@@ -60,6 +60,9 @@ d3.csv("stats_version.csv", function(data) {
     .attr("width", function(d) { return x(d.count); })
     .attr("height", y.bandwidth() )
     .attr("fill", "#69b3a2")
+    .append('title')
+      .text((d) => `${d.count}`);
+    
 
 
     // .attr("x", function(d) { return x(d.Country); })
@@ -120,6 +123,8 @@ d3.csv("stats.csv", function(data) {
     .attr("width", function(d) { return x(d.count); })
     .attr("height", y.bandwidth() )
     .attr("fill", "#69b3a2")
+    .append('title')
+      .text((d) => `${d.count}`);
 
 
     // .attr("x", function(d) { return x(d.Country); })
