@@ -5,178 +5,35 @@
 </head>
 <body>
   <style type="text/css">
-    #halftable {
-      width:50%;
-      float:left;
+    th, td {
+      border-bottom: 1px solid #ddd;
+      padding: 15px;
+      text-align: left;
     }
-    .halfgraph {
-      width:50%;
-      float:left;
-    }
+    tr:nth-child(even) {background-color: #f2f2f2;}
+    tr:hover {background-color: coral;}
+
   </style>
 <h1>Fediverse Stats
 </h1>
 <h2>Peridocially collected stats around the Fediverse Parameters</h2>
 <hr />
 <div id="tables">
-    <div id="halftable">
+    <div>
       <h3>Top 10 Server Software</h3>
         <table><tr><th>count</th><th>software</th></tr><tr><td>9423</td><td>mastodon</td></tr><tr><td>1134</td><td>peertube</td></tr><tr><td>937</td><td>pleroma</td></tr><tr><td>833</td><td>wordpress</td></tr><tr><td>475</td><td>writefreely</td></tr><tr><td>428</td><td>misskey</td></tr><tr><td>352</td><td>pixelfed</td></tr><tr><td>338</td><td>friendica</td></tr><tr><td>158</td><td>akkoma</td></tr></table>
     </div>
-    <div id="halftable">
+    <div>
       <h3>Top 10 Server Software with Version Bifurcation</h3>
         <table><tr><th>count</th><th>software</th><th>version</th></tr><tr><td>6152</td><td>mastodon</td><td>4.0.2</td></tr><tr><td>1355</td><td>mastodon</td><td>3.5.3</td></tr><tr><td>693</td><td>wordpress</td><td>6.1.1</td></tr><tr><td>355</td><td>peertube</td><td>4.3.1</td></tr><tr><td>320</td><td>pleroma</td><td>2.4.4</td></tr><tr><td>278</td><td>misskey</td><td>12.119.0</td></tr><tr><td>277</td><td>pixelfed</td><td>0.11.4</td></tr><tr><td>274</td><td>mastodon</td><td>4.0.1</td></tr><tr><td>261</td><td>peertube</td><td>4.3.0</td></tr></table>
     </div>
-    <div id="halftable">
+    <div>
       <h3>Top 10 TLD's hosting the fediverse accounts</h3>
         <table><tr><th>COUNT</th><th>TLD</th></tr><tr><td>2133</td><td>com</td></tr><tr><td>1877</td><td>social</td></tr><tr><td>1238</td><td>net</td></tr><tr><td>1011</td><td>org</td></tr><tr><td>1002</td><td>de</td></tr><tr><td>448</td><td>fr</td></tr><tr><td>413</td><td>me</td></tr><tr><td>349</td><td>xyz</td></tr><tr><td>308</td><td>dev</td></tr></table>
     </div>
 </div>
 <br />
 <hr />
-
-
-
-<!-- Load d3.js 
-<script src="https://d3js.org/d3.v4.js"></script>
--->
-
-
-<!-- Create a div where the graph will take place -->
-
-<!--
-<script>
-function stats_version() {
-
-d3.selectAll('#my_dataviz svg').remove();
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 40, left: 180},
-    width = 1000 - margin.left - margin.right,
-    height = 10000 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-// Parse the Data
-d3.csv("stats_version.csv", function(data) {
-
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([0,d3.max(data,function(d){return d.count;})])
-    .range([ 0, width]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
-
-  // Y axis
-  var y = d3.scaleBand()
-    .range([ 0, height ])
-    .domain(data.map(function(d) { return d.software + d.version; }))
-    .padding(.1);
-  svg.append("g")
-    .call(d3.axisLeft(y))
-
-  //Bars
-  svg.selectAll("myRect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("x", x(0) )
-    .attr("y", function(d) { return y(d.software + d.version); })
-    .attr("width", function(d) { return x(d.count); })
-    .attr("height", y.bandwidth() )
-    .attr("fill", "#69b3a2")
-    .append('title')
-      .text((d) => `${d.count}`);
-    
-
-
-    // .attr("x", function(d) { return x(d.Country); })
-    // .attr("y", function(d) { return y(d.Value); })
-    // .attr("width", x.bandwidth())
-    // .attr("height", function(d) { return height - y(d.Value); })
-    // .attr("fill", "#69b3a2")
-
-})
-
-}
-
-function stats(){
-d3.selectAll('#my_dataviz svg').remove();
-// set the dimensions and margins of the graph
-var margin = {top: 30, right: 30, bottom: 40, left: 60},
-    width = 1000 - margin.left - margin.right,
-    height = 1200 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#my_dataviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-// Parse the Data
-d3.csv("stats.csv", function(data) {
-
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain([0,d3.max(data,function(d){return d.count;})])
-    .range([ 0, width]);
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
-
-  // Y axis
-  var y = d3.scaleBand()
-    .range([ 0, height ])
-    .domain(data.map(function(d) { return d.software; }))
-    .padding(.1);
-  svg.append("g")
-    .call(d3.axisLeft(y))
-
-  //Bars
-  svg.selectAll("myRect")
-    .data(data)
-    .enter()
-    .append("rect")
-    .attr("x", x(0) )
-    .attr("y", function(d) { return y(d.software); })
-    .attr("width", function(d) { return x(d.count); })
-    .attr("height", y.bandwidth() )
-    .attr("fill", "#69b3a2")
-    .append('title')
-      .text((d) => `${d.count}`);
-
-
-    // .attr("x", function(d) { return x(d.Country); })
-    // .attr("y", function(d) { return y(d.Value); })
-    // .attr("width", x.bandwidth())
-    // .attr("height", function(d) { return height - y(d.Value); })
-    // .attr("fill", "#69b3a2")
-
-})
-
-}
-
-</script>
-<div>
-  <button onclick="stats()">STATS</button> <button onclick="stats_version()">STATS with Version</button>
-  <div id="my_dataviz"></div>
--->
 
 </body>
 </html>
