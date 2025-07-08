@@ -1,118 +1,273 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fediverse Stats</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fafafa;
+            padding: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        /* Typography */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #6b7280;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #374151;
+            margin: 30px 0 15px 0;
+            padding-left: 10px;
+            border-left: 4px solid #2563eb;
+        }
+
+        /* Grid layout for sections */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .stats-section {
+            background: #f9fafb;
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid #e5e7eb;
+        }
+
+        /* Table styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #374151;
+            color: white;
+            padding: 12px 8px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 10px 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* Growth table - full width */
+        .growth-section {
+            grid-column: 1 / -1;
+        }
+
+        .growth-section table {
+            font-size: 0.8rem;
+        }
+
+        .growth-section th,
+        .growth-section td {
+            padding: 8px 6px;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1rem;
+            }
+
+            h3 {
+                font-size: 1.1rem;
+                margin: 20px 0 10px 0;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .stats-section {
+                padding: 15px;
+            }
+
+            table {
+                font-size: 0.8rem;
+            }
+
+            th, td {
+                padding: 8px 6px;
+            }
+
+            .growth-section table {
+                font-size: 0.7rem;
+            }
+
+            .growth-section th,
+            .growth-section td {
+                padding: 6px 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            table {
+                font-size: 0.75rem;
+            }
+
+            th, td {
+                padding: 6px 4px;
+            }
+
+            .growth-section table {
+                font-size: 0.65rem;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+            }
+
+            .growth-section thead,
+            .growth-section tbody,
+            .growth-section th,
+            .growth-section td,
+            .growth-section tr {
+                display: block;
+            }
+
+            .growth-section table {
+                display: table;
+            }
+        }
+
+        /* Utility classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-large {
+            margin-bottom: 40px;
+        }
+    </style>
 </head>
 <body>
-  <style type="text/css">
-    .stats {
-       display: block;
-       width: 350px;
-       height: 400px;
-       float: left;
-    }
-    .stats-growth {
-       display: block;
-       width: 800px;
-       height: 800px;
-       float: left;
-    }
-    .clear {
-      clear:both;
-      content:"";
-      display: block;
-    }
-    th, td {
-      border-bottom: 1px solid #ddd;
-      text-align: center;
-        padding: 5px;
-    }
-    th {
-        background-color: Grey;
-        color:white;
-    }
-    table {
-        margin-left: auto;
-        margin-right: auto;
-    }
-    tr:nth-child(even) {
-        background-color: #f2f2f2;
-    }
-    tr:hover {
-        background-color: darkgrey;
-    }
+    <div class="container">
+        <h1>Fediverse Stats</h1>
+        <h2>Periodically collected stats around the Fediverse Parameters</h2>
 
-  
-  </style>
-<h1>Fediverse Stats
-</h1>
-<h2>Peridocially collected stats around the Fediverse Parameters</h2>
-<hr />
-<div id="tables">
-    <div class="stats">
-      <center>
-        <h3>Top 10 Server Software</h3>
-        <table><tr><th>count</th><th>software</th></tr><tr><td>9128</td><td>mastodon</td></tr><tr><td>5790</td><td>wordpress</td></tr><tr><td>1408</td><td>peertube</td></tr><tr><td>1174</td><td>misskey</td></tr><tr><td>1018</td><td>ghost</td></tr><tr><td>631</td><td>pixelfed</td></tr><tr><td>483</td><td>lemmy</td></tr><tr><td>446</td><td>sharkey</td></tr><tr><td>264</td><td>friendica</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Top 10 Server Software + Version</h3>
-        <table><tr><th>count</th><th>software</th><th>version</th></tr><tr><td>5123</td><td>wordpress</td><td>6.8</td></tr><tr><td>3678</td><td>mastodon</td><td>4.3.9</td></tr><tr><td>1566</td><td>mastodon</td><td>4.3.8</td></tr><tr><td>1018</td><td>ghost</td><td>0.1.0</td></tr><tr><td>492</td><td>peertube</td><td>7.2.1</td></tr><tr><td>480</td><td>mastodon</td><td>4.3.4</td></tr><tr><td>470</td><td>pixelfed</td><td>0.12.5</td></tr><tr><td>413</td><td>mastodon</td><td>4.3.7</td></tr><tr><td>379</td><td>misskey</td><td>2025.6.3</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Top 10 TLD's</h3>
-        <table><tr><th>COUNT</th><th>TLD</th></tr><tr><td>5706</td><td>com</td></tr><tr><td>2022</td><td>social</td></tr><tr><td>1969</td><td>net</td></tr><tr><td>1442</td><td>org</td></tr><tr><td>1337</td><td>de</td></tr><tr><td>526</td><td>me</td></tr><tr><td>501</td><td>fr</td></tr><tr><td>463</td><td>io</td></tr><tr><td>362</td><td>eu</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>MISC STATS</h3>
-        <table><tr><th>Item</th><th> Count</th></tr><tr><td>Single User Instances</td><td>9271</td></tr><tr><td>Most supported</td><td>activitypub:2.0</td></tr><tr><td>Open Registrations</td><td>8394</td></tr><tr><td>Close Registrations</td><td>13751</td></tr><tr><td>BirdSiteLive Instances</td><td>6</td></tr><tr><td>Average Monthly Active Users</td><td>47</td></tr><tr><td>Average Half-Year Active Users</td><td>136</td></tr><tr><td>Average Engagement Ratio</td><td>0.60</td></tr><tr><td>High Engagement Instances</td><td>9887</td></tr><tr><td>Low Engagement Instances</td><td>1089</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Average Users per Server by Software</h3>
-        <table><tr><th>software</th><th>average_users</th></tr><tr><td>NodeBB</td><td>55379.49</td></tr><tr><td>diaspora</td><td>4237.90</td></tr><tr><td>lemmy</td><td>2582.43</td></tr><tr><td>pixelfed</td><td>1323.21</td></tr><tr><td>misskey</td><td>908.28</td></tr><tr><td>mastodon</td><td>834.76</td></tr><tr><td>Mobilizon</td><td>610.82</td></tr><tr><td>bookwyrm</td><td>540.10</td></tr><tr><td>peertube</td><td>407.23</td></tr><tr><td>mbin</td><td>392.11</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Top 10 Most Active Server Software (by Avg. Monthly Active Users)</h3>
-        <table><tr><th>software</th><th>total_monthly_active_users</th></tr><tr><td>mastodon</td><td>711081</td></tr><tr><td>pixelfed</td><td>145150</td></tr><tr><td>NodeBB</td><td>56408</td></tr><tr><td>peertube</td><td>42967</td></tr><tr><td>lemmy</td><td>41543</td></tr><tr><td>wordpress</td><td>14002</td></tr><tr><td>fedibird</td><td>7855</td></tr><tr><td>misskey</td><td>5766</td></tr><tr><td>bookwyrm</td><td>2878</td></tr><tr><td>pleroma</td><td>2731</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Top 10 Multi-User Software</h3>
-        <table><tr><th>count</th><th>software</th></tr><tr><td>6867</td><td>mastodon</td></tr><tr><td>1366</td><td>peertube</td></tr><tr><td>1271</td><td>wordpress</td></tr><tr><td>1160</td><td>misskey</td></tr><tr><td>447</td><td>pixelfed</td></tr><tr><td>415</td><td>lemmy</td></tr><tr><td>358</td><td>sharkey</td></tr><tr><td>114</td><td>hometown</td></tr><tr><td>101</td><td>gancio</td></tr><tr><td>99</td><td>Mobilizon</td></tr></table>
-      </center>
-    </div>
-    <div class="stats">
-      <center>
-      <h3>Top 10 Single-User Software</h3>
-        <table><tr><th>count</th><th>software</th></tr><tr><td>4514</td><td>wordpress</td></tr><tr><td>2244</td><td>mastodon</td></tr><tr><td>1018</td><td>ghost</td></tr><tr><td>211</td><td>owncast</td></tr><tr><td>184</td><td>pixelfed</td></tr><tr><td>82</td><td>sharkey</td></tr><tr><td>46</td><td>lemmy</td></tr><tr><td>42</td><td>peertube</td></tr><tr><td>31</td><td>sutty-distributed-press</td></tr><tr><td>25</td><td>aoderelay</td></tr></table>
-      </center>
-    </div>
-</div>
-<span class="clear">&nbsp;
-</span>
+        <div class="stats-grid">
+            <div class="stats-section">
+                <h3>Top 10 Server Software</h3>
+                <table><tr><th>count</th><th>software</th></tr><tr><td>9128</td><td>mastodon</td></tr><tr><td>5790</td><td>wordpress</td></tr><tr><td>1408</td><td>peertube</td></tr><tr><td>1174</td><td>misskey</td></tr><tr><td>1018</td><td>ghost</td></tr><tr><td>631</td><td>pixelfed</td></tr><tr><td>483</td><td>lemmy</td></tr><tr><td>446</td><td>sharkey</td></tr><tr><td>264</td><td>friendica</td></tr><tr><td>211</td><td>owncast</td></tr></table>
+            </div>
 
-<br />
-<hr />
-    <div class="stats_growth">
-      <center>
-      <h3>Growth (Measured alternate days)</h3>
-        <table><tr><th>Date</th><th>Count_of_servers</th><th>TOTAL_POSTS</th><th>TOTAL_COMMENTS</th><th>TOTAL_USERS</th><th>ACTIVE_USERS_MONTH</th><th>ACTIVE_USERS_HALF_YEAR</th></tr><tr><td>2025-07-07</td><td>24667</td><td>1371361525</td><td>29987014</td><td>16230545</td><td>1049895</td><td>3008946</td></tr><tr><td>2025-07-05</td><td>24698</td><td>1384891915</td><td>31209585</td><td>16348963</td><td>1048786</td><td>3007935</td></tr><tr><td>2025-04-23</td><td>24391</td><td>1395315321</td><td>27818279</td><td>15098287</td><td>15098287</td><td>15098287</td></tr><tr><td>2025-04-21</td><td>24379</td><td>1398875444</td><td>27844062</td><td>15243631</td><td>15243631</td><td>15243631</td></tr><tr><td>2025-04-19</td><td>24402</td><td>1387438415</td><td>27813901</td><td>15062988</td><td>15062988</td><td>15062988</td></tr><tr><td>2025-04-17</td><td>24451</td><td>1395829812</td><td>26836123</td><td>14929660</td><td>14929660</td><td>14929660</td></tr><tr><td>2025-04-15</td><td>24361</td><td>1447107244</td><td>26546521</td><td>15056566</td><td>15056566</td><td>15056566</td></tr><tr><td>2025-04-13</td><td>24379</td><td>1432509977</td><td>25775594</td><td>14829775</td><td>14829775</td><td>14829775</td></tr><tr><td>2025-04-11</td><td>24403</td><td>1443123159</td><td>26573330</td><td>14973317</td><td>14973317</td><td>14973317</td></tr><tr><td>2025-04-09</td><td>24277</td><td>1442403317</td><td>26028174</td><td>15053938</td><td>15053938</td><td>15053938</td></tr></table>
-      </center>
-    </div>
-<span class="clear">&nbsp;
-</span>
-<br />
-<hr />
+            <div class="stats-section">
+                <h3>Top 10 Server Software + Version</h3>
+                <table><tr><th>count</th><th>software</th><th>version</th></tr><tr><td>5123</td><td>wordpress</td><td>6.8</td></tr><tr><td>3678</td><td>mastodon</td><td>4.3.9</td></tr><tr><td>1566</td><td>mastodon</td><td>4.3.8</td></tr><tr><td>1018</td><td>ghost</td><td>0.1.0</td></tr><tr><td>492</td><td>peertube</td><td>7.2.1</td></tr><tr><td>480</td><td>mastodon</td><td>4.3.4</td></tr><tr><td>470</td><td>pixelfed</td><td>0.12.5</td></tr><tr><td>413</td><td>mastodon</td><td>4.3.7</td></tr><tr><td>379</td><td>misskey</td><td>2025.6.3</td></tr><tr><td>327</td><td>mastodon</td><td>4.3.6</td></tr></table>
+            </div>
 
+            <div class="stats-section">
+                <h3>Top 10 TLD's</h3>
+                <table><tr><th>COUNT</th><th>TLD</th></tr><tr><td>5706</td><td>com</td></tr><tr><td>2022</td><td>social</td></tr><tr><td>1969</td><td>net</td></tr><tr><td>1442</td><td>org</td></tr><tr><td>1337</td><td>de</td></tr><tr><td>526</td><td>me</td></tr><tr><td>501</td><td>fr</td></tr><tr><td>463</td><td>io</td></tr><tr><td>362</td><td>eu</td></tr><tr><td>348</td><td>xyz</td></tr></table>
+            </div>
+
+            <div class="stats-section">
+                <h3>Misc Stats</h3>
+                <table><tr><th>Item</th><th> Count</th></tr><tr><td>Single User Instances</td><td>9271</td></tr><tr><td>Most supported</td><td>activitypub:2.0</td></tr><tr><td>Open Registrations</td><td>8394</td></tr><tr><td>Close Registrations</td><td>13751</td></tr><tr><td>BirdSiteLive Instances</td><td>6</td></tr><tr><td>Average Monthly Active Users</td><td>47</td></tr><tr><td>Average Half-Year Active Users</td><td>136</td></tr><tr><td>Average Engagement Ratio</td><td>0.60</td></tr><tr><td>High Engagement Instances</td><td>9887</td></tr><tr><td>Low Engagement Instances</td><td>1089</td></tr></table>
+            </div>
+
+            <div class="stats-section">
+                <h3>Average Users per Server by Software</h3>
+                <table><tr><th>software</th><th>average_users</th></tr><tr><td>NodeBB</td><td>55379.49</td></tr><tr><td>diaspora</td><td>4237.90</td></tr><tr><td>lemmy</td><td>2582.43</td></tr><tr><td>pixelfed</td><td>1323.21</td></tr><tr><td>misskey</td><td>908.28</td></tr><tr><td>mastodon</td><td>834.76</td></tr><tr><td>Mobilizon</td><td>610.82</td></tr><tr><td>bookwyrm</td><td>540.10</td></tr><tr><td>peertube</td><td>407.23</td></tr><tr><td>mbin</td><td>392.11</td></tr></table>
+            </div>
+
+            <div class="stats-section">
+                <h3>Top 10 Most Active Server Software</h3>
+                <table><tr><th>software</th><th>total_monthly_active_users</th></tr><tr><td>mastodon</td><td>711081</td></tr><tr><td>pixelfed</td><td>145150</td></tr><tr><td>NodeBB</td><td>56408</td></tr><tr><td>peertube</td><td>42967</td></tr><tr><td>lemmy</td><td>41543</td></tr><tr><td>wordpress</td><td>14002</td></tr><tr><td>fedibird</td><td>7855</td></tr><tr><td>misskey</td><td>5766</td></tr><tr><td>bookwyrm</td><td>2878</td></tr><tr><td>pleroma</td><td>2731</td></tr></table>
+            </div>
+
+            <div class="stats-section">
+                <h3>Top 10 Multi-User Software</h3>
+                <table><tr><th>count</th><th>software</th></tr><tr><td>6867</td><td>mastodon</td></tr><tr><td>1366</td><td>peertube</td></tr><tr><td>1271</td><td>wordpress</td></tr><tr><td>1160</td><td>misskey</td></tr><tr><td>447</td><td>pixelfed</td></tr><tr><td>415</td><td>lemmy</td></tr><tr><td>358</td><td>sharkey</td></tr><tr><td>114</td><td>hometown</td></tr><tr><td>101</td><td>gancio</td></tr><tr><td>99</td><td>Mobilizon</td></tr></table>
+            </div>
+
+            <div class="stats-section">
+                <h3>Top 10 Single-User Software</h3>
+                <table><tr><th>count</th><th>software</th></tr><tr><td>4514</td><td>wordpress</td></tr><tr><td>2244</td><td>mastodon</td></tr><tr><td>1018</td><td>ghost</td></tr><tr><td>211</td><td>owncast</td></tr><tr><td>184</td><td>pixelfed</td></tr><tr><td>82</td><td>sharkey</td></tr><tr><td>46</td><td>lemmy</td></tr><tr><td>42</td><td>peertube</td></tr><tr><td>31</td><td>sutty-distributed-press</td></tr><tr><td>25</td><td>aoderelay</td></tr></table>
+            </div>
+        </div>
+
+        <div class="stats-section growth-section">
+            <h3>Growth (Measured alternate days)</h3>
+            <table><tr><th>Date</th><th>Count_of_servers</th><th>TOTAL_POSTS</th><th>TOTAL_COMMENTS</th><th>TOTAL_USERS</th><th>ACTIVE_USERS_MONTH</th><th>ACTIVE_USERS_HALF_YEAR</th></tr><tr><td>2025-07-07</td><td>24667</td><td>1371361525</td><td>29987014</td><td>16230545</td><td>1049895</td><td>3008946</td></tr><tr><td>2025-07-05</td><td>24698</td><td>1384891915</td><td>31209585</td><td>16348963</td><td>1048786</td><td>3007935</td></tr><tr><td>2025-04-23</td><td>24391</td><td>1395315321</td><td>27818279</td><td>15098287</td><td>15098287</td><td>15098287</td></tr><tr><td>2025-04-21</td><td>24379</td><td>1398875444</td><td>27844062</td><td>15243631</td><td>15243631</td><td>15243631</td></tr><tr><td>2025-04-19</td><td>24402</td><td>1387438415</td><td>27813901</td><td>15062988</td><td>15062988</td><td>15062988</td></tr><tr><td>2025-04-17</td><td>24451</td><td>1395829812</td><td>26836123</td><td>14929660</td><td>14929660</td><td>14929660</td></tr><tr><td>2025-04-15</td><td>24361</td><td>1447107244</td><td>26546521</td><td>15056566</td><td>15056566</td><td>15056566</td></tr><tr><td>2025-04-13</td><td>24379</td><td>1432509977</td><td>25775594</td><td>14829775</td><td>14829775</td><td>14829775</td></tr><tr><td>2025-04-11</td><td>24403</td><td>1443123159</td><td>26573330</td><td>14973317</td><td>14973317</td><td>14973317</td></tr><tr><td>2025-04-09</td><td>24277</td><td>1442403317</td><td>26028174</td><td>15053938</td><td>15053938</td><td>15053938</td></tr></table>
+        </div>
+    </div>
 </body>
 </html>
