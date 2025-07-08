@@ -86,7 +86,7 @@
             background-color: #374151;
             color: white;
             padding: 12px 8px;
-            text-align: left;
+            text-align: center; /* Changed from left to center */
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.75rem;
@@ -96,6 +96,7 @@
         td {
             padding: 10px 8px;
             border-bottom: 1px solid #e5e7eb;
+            text-align: center; /* Added text-align center */
         }
 
         tr:nth-child(even) {
@@ -215,6 +216,26 @@
         .mb-large {
             margin-bottom: 40px;
         }
+
+        /* Footer styles */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e7eb;
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -269,5 +290,8 @@
             <table><tr><th>Date</th><th>Count_of_servers</th><th>TOTAL_POSTS</th><th>TOTAL_COMMENTS</th><th>TOTAL_USERS</th><th>ACTIVE_USERS_MONTH</th><th>ACTIVE_USERS_HALF_YEAR</th></tr><tr><td>2025-07-07</td><td>24667</td><td>1371361525</td><td>29987014</td><td>16230545</td><td>1049895</td><td>3008946</td></tr><tr><td>2025-07-05</td><td>24698</td><td>1384891915</td><td>31209585</td><td>16348963</td><td>1048786</td><td>3007935</td></tr><tr><td>2025-04-23</td><td>24391</td><td>1395315321</td><td>27818279</td><td>15098287</td><td>15098287</td><td>15098287</td></tr><tr><td>2025-04-21</td><td>24379</td><td>1398875444</td><td>27844062</td><td>15243631</td><td>15243631</td><td>15243631</td></tr><tr><td>2025-04-19</td><td>24402</td><td>1387438415</td><td>27813901</td><td>15062988</td><td>15062988</td><td>15062988</td></tr><tr><td>2025-04-17</td><td>24451</td><td>1395829812</td><td>26836123</td><td>14929660</td><td>14929660</td><td>14929660</td></tr><tr><td>2025-04-15</td><td>24361</td><td>1447107244</td><td>26546521</td><td>15056566</td><td>15056566</td><td>15056566</td></tr><tr><td>2025-04-13</td><td>24379</td><td>1432509977</td><td>25775594</td><td>14829775</td><td>14829775</td><td>14829775</td></tr><tr><td>2025-04-11</td><td>24403</td><td>1443123159</td><td>26573330</td><td>14973317</td><td>14973317</td><td>14973317</td></tr><tr><td>2025-04-09</td><td>24277</td><td>1442403317</td><td>26028174</td><td>15053938</td><td>15053938</td><td>15053938</td></tr></table>
         </div>
     </div>
+    <footer class="footer">
+        <p>A project by <a href="https://cyfinoid.com" target="_blank">Cyfinoid Research</a>, a research-focused cybersecurity firm.</p>
+    </footer>
 </body>
 </html>
